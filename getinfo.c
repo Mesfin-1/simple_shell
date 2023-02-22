@@ -47,12 +47,14 @@ void set_info(info_t *info, char **av)
  * free_info - frees info_t struct fields
  * @info: struct address
  * @ffree: frees a pointer and NULLs the address
- * @f: true if freeing all fields
+ * @f: true if freeing all field.s
+ * @sfree: frees info from argv.
+ * @pfree: frees info from cmd_buf.
  */
 
 void free_info(info_t *info, int f)
 {
-	ffree(info->argv);
+	sfree(info->argv);
 	info->argv = NULL;
 	info->path = NULL;
 	if (f)
@@ -65,9 +67,9 @@ void free_info(info_t *info, int f)
 			free_list(&(info->history));
 		if (info->alias)
 			free_list(&(info->alias));
-		ffree(info->environ);
+		sfree(info->environ);
 			info->environ = NULL;
-		bfree((void **)info->cmd_buf);
+		pfree((void **)info->cmd_buf);
 		if (info->readfd > 2)
 			close(info->readfd);
 		_putchar(BUF_FLUSH);
