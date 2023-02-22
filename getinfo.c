@@ -46,6 +46,7 @@ void set_info(info_t *info, char **av)
 /**
  * free_info - frees info_t struct fields
  * @info: struct address
+ * @ffree: frees a pointer and NULLs the address
  * @f: true if freeing all fields
  */
 
